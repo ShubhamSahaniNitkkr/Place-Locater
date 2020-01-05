@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Place Locater" />
+    <link rel="icon" href="./graphics/title.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    />
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <title>Place Locater | Shubham Sunny</title>
+  </head>
+  <body>
+    <div class="containner-fluid mt-5 pt-3">
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm mb-5 bg-white rounded pl-4 pr-4"
+      >
+        <a class="navbar-brand" to="/">
+          <i class="fas fa-thumbtack text-primary"></i> Place Locater
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" to="/">
+                <i class="fas fa-home text-primary"></i> Home &nbsp;
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" to="/about">
+                <i class="fas fa-user-friends  text-primary"></i> &nbsp;About us
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- <home page start>  -->
+
+      <div id="map" style="width: 100vw; height: 60vh;"></div>
+      <div class="col-md-12 d-flex justify-content-center mt-3  ">
+        <!-- <add place form> -->
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 50vw;">
+          <div class="card-body">
+            <form id="place-form">
+              <div class="form-group">
+                <i class="fas fa-map-marker-alt text-primary"></i> &nbsp;<label
+                  for="place-address"
+                  >Address</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="place-address"
+                  placeholder="Enter Place Address that You want to Pin on the Map"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <i class="fas fa-store text-primary"></i> &nbsp;
+                <label for="place-id">Place Id</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="place-id"
+                  placeholder="Enter Unique place Id"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus text-white"></i> &nbsp; Add New Place
+              </button>
+            </form>
+          </div>
+          <!-- <a type="button" class="btn btn-primary m-1" href="./Add.html">
+           
+          </a> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- <script  -->
+    <script src="js/map.js"></script>
+    <script src="js/add.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+@font-face {
+  font-family: myGoogleFont;
+  src: url("../graphics/GoogleSans-Regular.ttf");
+}
+
+body {
+  font-family: myGoogleFont !important;
+  overflow-x: hidden;
+}

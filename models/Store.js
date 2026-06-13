@@ -31,6 +31,15 @@ const StoreSchema = new mongoose.Schema({
 });
 
 StoreSchema.pre("save", async function(next) {
+  if (
+    this.location &&
+    this.location.coordinates &&
+    this.location.coordinates.length === 2
+  ) {
+    this.address = undefined;
+    return next();
+  }
+
   const loc = await geoCoder.geocode(this.address);
   this.location = {
     type: "Point",

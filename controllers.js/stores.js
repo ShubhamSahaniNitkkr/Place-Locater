@@ -26,10 +26,32 @@ exports.getStores = async (req, res) => {
   }
 };
 
+function buildStorePayload(body) {
+  const payload = {
+    storeId: body.storeId,
+    address: body.address
+  };
+
+  const lat = parseFloat(body.latitude);
+  const lng = parseFloat(body.longitude);
+
+  if (!Number.isNaN(lat) && !Number.isNaN(lng)) {
+    payload.location = {
+      type: "Point",
+      coordinates: [lng, lat],
+      formattedAddress: body.address
+    };
+  }
+
+  return payload;
+}
+
 exports.addStore = async (req, res) => {
   try {
+    const storePayload = buildStorePayload(req.body);
+
     if (isDemoMode()) {
-      const store = mockStores.create(req.body);
+      const store = mockStores.create(storePayload);
       return res.status(200).json({
         success: true,
         data: store,
@@ -37,7 +59,7 @@ exports.addStore = async (req, res) => {
       });
     }
 
-    const store = await Store.create(req.body);
+    const store = await Store.create(storePayload);
     return res.status(200).json({
       success: true,
       data: store

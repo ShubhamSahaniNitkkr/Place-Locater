@@ -41,13 +41,22 @@ function create(data) {
     error.code = 11000;
     throw error;
   }
+
+  const coordinates =
+    data.location && data.location.coordinates
+      ? data.location.coordinates
+      : [77.31, 28.58];
+
   const store = {
     _id: `mock-${stores.length + 1}`,
     storeId: data.storeId,
     location: {
       type: "Point",
-      coordinates: [77.31, 28.58],
-      formattedAddress: data.address || "Demo Address"
+      coordinates,
+      formattedAddress:
+        (data.location && data.location.formattedAddress) ||
+        data.address ||
+        "Demo Address"
     },
     createdAt: new Date()
   };

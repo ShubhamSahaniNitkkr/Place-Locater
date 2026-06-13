@@ -8,6 +8,114 @@ body {
   height: 50vh !important;
   min-height: 280px;
   z-index: 1;
+  cursor: crosshair;
+}
+
+.map-hint {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.shared-banner {
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+  border: 1px solid #c8e6c9;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem auto;
+  max-width: 50vw;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.shared-banner i {
+  color: #2e7d32;
+}
+
+.autocomplete-wrap {
+  position: relative;
+}
+
+#address-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-top: none;
+  border-radius: 0 0 0.25rem 0.25rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+}
+
+#address-suggestions.show {
+  display: block;
+}
+
+.suggestion-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: #fff;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:hover,
+.suggestion-item:focus {
+  background: #f8f9fa;
+  outline: none;
+}
+
+.coords-display {
+  font-size: 0.85rem;
+  color: #495057;
+  background: #f8f9fa;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 2.5rem;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#app-toast {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: #212529;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  z-index: 2000;
+  transition: transform 0.25s ease;
+  max-width: 90vw;
+  text-align: center;
+}
+
+#app-toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+#app-toast.toast-error {
+  background: #c62828;
 }
 
 @media (max-width: 768px) {
@@ -15,8 +123,10 @@ body {
     height: 40vh !important;
   }
 
-  .card {
+  .card,
+  .shared-banner {
     width: 95vw !important;
+    max-width: 95vw !important;
     margin: 0 auto;
   }
 

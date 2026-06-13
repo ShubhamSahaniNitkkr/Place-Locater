@@ -1,27 +1,35 @@
 # Place Locater
 
-> Find nearby stores on an interactive map using geolocation and MongoDB.
+> Pin, search, and share locations on an interactive map — like WhatsApp live location.
 
 ![Screenshot](./screenshot.png)
 > Add `screenshot.png` in project root for preview.
 
 ## Purpose
 
-Find nearby stores on an interactive map using geolocation and MongoDB.
+Find and save places on a map with address autocomplete, map tap-to-pin, current location, and shareable links.
+
+## Features
+
+- Address search with autocomplete (OpenStreetMap Nominatim)
+- Tap the map to drop a draggable pin
+- **Use my location** for GPS pinning
+- **Share location** — copy or native share (WhatsApp, etc.)
+- Shared links open the map centered on the pin (`?lat=&lng=&place=&address=`)
 
 ## Use Cases
 
-- Map-based store finder
-- Geospatial queries
-- Location API integration
+- Map-based store / place finder
+- Share a meeting point via link
+- Geospatial store data with MongoDB
 
 ## Tech Stack
 
 - Node.js
 - Express
 - MongoDB
-- Mapbox
-- Geocoder
+- Leaflet + OpenStreetMap
+- Nominatim geocoding (client) + node-geocoder (server)
 
 ## How to Run Locally
 
@@ -29,12 +37,13 @@ Find nearby stores on an interactive map using geolocation and MongoDB.
 npm install && npm run demo
 ```
 
+Open [http://localhost:5000](http://localhost:5000)
+
 ## Live Demo
 
-[https://shubhamsahaniNitkkr.github.io/Place-Locater/](https://shubhamsahaniNitkkr.github.io/Place-Locater/)
+[Portfolio demo](https://shubhamsahaniNitkkr.github.io/old-basic-projects/projects/Place-Locater/)
 
-
-> **Note:** Map tiles need Mapbox token for full map display.
+> **Note:** Static preview supports search, map pins, and shared links. Run `npm run demo` locally to persist new places.
 
 ## Performance & UI
 

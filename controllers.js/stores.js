@@ -1,11 +1,19 @@
 const Store = require("../models/Store");
+const { isDemoMode } = require("../config/demo");
+const mockStores = require("../mock/stores");
 
-//@desc Get All Stores
-//@route GET /api/v1/stores
-//@acess Public
-
-exports.getStores = async (req, res, next) => {
+exports.getStores = async (req, res) => {
   try {
+    if (isDemoMode()) {
+      const stores = mockStores.getAll();
+      return res.status(200).json({
+        success: true,
+        count: stores.length,
+        data: stores,
+        demoMode: true
+      });
+    }
+
     const stores = await Store.find();
     return res.status(200).json({
       success: true,
@@ -18,12 +26,17 @@ exports.getStores = async (req, res, next) => {
   }
 };
 
-//@desc Create new Store
-//@route POST /api/v1/stores
-//@acess Public
-
-exports.addStore = async (req, res, next) => {
+exports.addStore = async (req, res) => {
   try {
+    if (isDemoMode()) {
+      const store = mockStores.create(req.body);
+      return res.status(200).json({
+        success: true,
+        data: store,
+        demoMode: true
+      });
+    }
+
     const store = await Store.create(req.body);
     return res.status(200).json({
       success: true,

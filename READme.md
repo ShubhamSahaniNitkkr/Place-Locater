@@ -2,7 +2,8 @@
 
 > Pin, search, and share locations on an interactive map — like WhatsApp live location.
 
-![Screenshot](./screenshot.png)
+<img width="2236" height="1169" alt="image" src="https://github.com/user-attachments/assets/8414c1f1-eb12-467c-bdf9-b1e7aec94430" />
+
 > Add `screenshot.png` in project root for preview.
 
 ## Purpose
@@ -41,7 +42,7 @@ Open [http://localhost:5000](http://localhost:5000)
 
 ## Live Demo
 
-[Portfolio demo](https://shubhamsahaniNitkkr.github.io/old-basic-projects/projects/Place-Locater/)
+https://place-locater.onrender.com/
 
 > **Note:** Static preview supports search, map pins, and shared links. Run `npm run demo` locally to persist new places.
 

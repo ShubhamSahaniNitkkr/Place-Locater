@@ -1,57 +1,63 @@
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoic2h1YmhhbXN1bm55IiwiYSI6ImNrNHoxemhnMTA2NnUzZHF1Ymk5YTV3MmoifQ.qXwiLgUIfrjvum6IsTWx3g";
-const map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/mapbox/streets-v11",
-  zoom: 7,
-  center: [77.310905, 28.582062]
-});
+const DEMO_STORES = [
+  {
+    storeId: "cafe-01",
+    location: {
+      coordinates: [77.209, 28.6139],
+      formattedAddress: "Connaught Place, New Delhi, India"
+    }
+  },
+  {
+    storeId: "shop-02",
+    location: {
+      coordinates: [77.1025, 28.7041],
+      formattedAddress: "Karol Bagh, New Delhi, India"
+    }
+  },
+  {
+    storeId: "park-03",
+    location: {
+      coordinates: [77.241, 28.5355],
+      formattedAddress: "Nehru Place, New Delhi, India"
+    }
+  }
+];
 
-async function getAllPlaces() {
-  const res = await fetch("/api/v1/stores");
-  const data = await res.json();
-  // console.log(data.data);
-  const allPlaces = data.data.map(place => {
-    return {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [
-          place.location.coordinates[0],
-          place.location.coordinates[1]
-        ]
-      },
-      properties: {
-        // storeId: place.location.formattedAddress,
-        storeId: place.storeId,
-        icon: "town-hall"
-      }
-    };
+const map = L.map("map").setView([28.582062, 77.310905], 7);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+const markers = L.layerGroup().addTo(map);
+
+function addMarkers(stores) {
+  markers.clearLayers();
+  stores.forEach(place => {
+    const [lng, lat] = place.location.coordinates;
+    L.marker([lat, lng])
+      .bindPopup(
+        `<strong>${place.storeId}</strong><br>${place.location.formattedAddress || ""}`
+      )
+      .addTo(markers);
   });
-  loadMap(allPlaces);
 }
 
-function loadMap(allPlaces) {
-  map.on("load", function() {
-    map.addLayer({
-      id: "points",
-      type: "symbol",
-      source: {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: allPlaces
-        }
-      },
-      layout: {
-        "icon-image": "{icon}-15",
-        "icon-size": 1.5,
-        "text-field": "[ {storeId} ]",
-        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-        "text-anchor": "top"
+async function getAllPlaces() {
+  try {
+    const res = await fetch("/api/v1/stores");
+    if (res.ok) {
+      const data = await res.json();
+      if (data.data && data.data.length) {
+        addMarkers(data.data);
+        return;
       }
-    });
-  });
+    }
+  } catch (err) {
+    // Static preview has no backend — fall back to demo pins below.
+  }
+  addMarkers(DEMO_STORES);
 }
 
 getAllPlaces();

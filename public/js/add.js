@@ -20,11 +20,16 @@ async function addPlace(e) {
     if (res.status === 400) {
       throw Error("Try With another Place Id !");
     }
+    if (!res.ok) {
+      throw Error("Server unavailable. Run locally with: npm run demo");
+    }
     alert("Place Added !");
-    window.location.href = "/index.html";
+    window.location.reload();
   } catch (error) {
-    alert(error);
-    return;
+    alert(
+      error.message ||
+        "Cannot add places in static preview. Run the server with: npm run demo"
+    );
   }
 }
 placeForm.addEventListener("submit", addPlace);
